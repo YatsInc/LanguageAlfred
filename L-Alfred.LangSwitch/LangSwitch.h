@@ -4,7 +4,7 @@
 
 class LangSwitch {
 public:
-	bool SwitchLang( DWORD kbLayout);
+	bool SwitchLang(DWORD kbLayout);
 };
 
 extern "C" __declspec(dllexport) bool SwitchLang(DWORD kbLayout) {
