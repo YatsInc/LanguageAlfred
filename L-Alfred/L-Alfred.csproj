@@ -12,13 +12,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.19.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="L-Alfred.LangSwitch">
-      <HintPath>..\x64\Debug\L-Alfred.LangSwitch.dll</HintPath>
-    </Reference>
+    <None Remove="C:\Users\comde\.nuget\packages\vosk\0.3.32\build\lib\win-x64\libgcc_s_seh-1.dll" />
   </ItemGroup>
 
 </Project>
