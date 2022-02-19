@@ -1,10 +1,19 @@
 ﻿using System.ComponentModel;
 using System.Management.Automation;
+using static L_Alfred.Constants;
+using static L_Alfred.WinApi;
 
 namespace L_Alfred;
 
-public static class LanguageList
+public static class Languages
 {
+    private static readonly List<LanguageModel> InstalledLanguages = new List<LanguageModel>();
+
+    static Languages()
+    {
+        InstalledLanguages = GetInstalledLanguages();
+    }
+
     public static List<LanguageModel> GetInstalledLanguages()
     {
         PowerShell ps = PowerShell.Create().AddCommand("Get-WinUserLanguageList");
@@ -41,5 +50,23 @@ public static class LanguageList
         }
 
         return installedLanguages;
+    }
+
+    public static void ShowInstalledLanguages()
+    {
+        Console.WriteLine("Your installed languages:");
+        foreach (var l in InstalledLanguages)
+            Console.WriteLine($" - {l.Language}{(!string.IsNullOrEmpty(l.Locale) ? $" ({l.Locale})" : "")}");
+    }
+
+    public static void ChangeLanguage(string switchTo)
+    {
+        var kbLayout = InstalledLanguages.FirstOrDefault(x => x.Language.ToLower().Contains(switchTo))?.LanguageIdentifier;
+
+        if (kbLayout != null)
+        {
+            PostMessage(window, WM_INPUTLANGCHANGEREQUEST, IntPtr.Zero, (IntPtr)kbLayout);
+            PostMessage(window, WM_INPUTLANGCHANGE, IntPtr.Zero, (IntPtr)kbLayout);
+        }
     }
 }

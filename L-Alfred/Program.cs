@@ -1,31 +1,18 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.Extensions.Configuration;
-using System.Runtime.InteropServices;
 using System.Text;
-using static L_Alfred.LanguageList;
+using static L_Alfred.Languages;
 
-[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-static extern bool PostMessage(IntPtr windowHandle, int Msg, IntPtr wParam, IntPtr lParam);
-
-IntPtr window = (IntPtr)0xffff;
-
-IntPtr enUS = (IntPtr)0x00000409;
-IntPtr ukUA = (IntPtr)0x00000422;
-IntPtr ruRU = (IntPtr)0x00000419;
 
 Console.InputEncoding = Encoding.UTF8;
 Console.OutputEncoding = Encoding.UTF8;
 
+ShowInstalledLanguages();
+
 var config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
             .Build();
-
-var languagesList = GetInstalledLanguages();
-
-Console.WriteLine("Your installed languages:");
-foreach (var l in languagesList)
-    Console.WriteLine($" - {l.Language}{(!string.IsNullOrEmpty(l.Locale) ? $" ({l.Locale})" : "")}");
 
 var subsribtionKey = config["SubsribtionKey"];
 var apiRegion = config["Region"];
@@ -78,18 +65,4 @@ async Task RecognizeCommand()
     await recognizer.StartContinuousRecognitionAsync();
 
     Task.WaitAny(new[] { stopRecognition.Task });
-}
-
-void ChangeLanguage(string switchTo)
-{
-    var kbLayout = languagesList.FirstOrDefault(x => x.Language.ToLower().Contains(switchTo))?.LanguageIdentifier;
-
-    if(kbLayout != null)
-        PostMessageWrapper((IntPtr)kbLayout);
-}
-
-void PostMessageWrapper(IntPtr kbLayout)
-{
-    PostMessage(window, 0x0050, IntPtr.Zero, kbLayout);
-    PostMessage(window, 0x0051, IntPtr.Zero, kbLayout);
 }
