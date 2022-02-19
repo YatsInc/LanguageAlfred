@@ -3,6 +3,7 @@ using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.Extensions.Configuration;
 using System.Runtime.InteropServices;
 using System.Text;
+using static L_Alfred.LanguageList;
 
 [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 static extern bool PostMessage(IntPtr windowHandle, int Msg, IntPtr wParam, IntPtr lParam);
@@ -19,6 +20,12 @@ Console.OutputEncoding = Encoding.UTF8;
 var config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
             .Build();
+
+var languagesList = GetInstalledLanguages();
+
+Console.WriteLine("Your installed languages:");
+foreach (var l in languagesList)
+    Console.WriteLine($" - {l.Language}{(!string.IsNullOrEmpty(l.Locale) ? $" ({l.Locale})" : "")}");
 
 var subsribtionKey = config["SubsribtionKey"];
 var apiRegion = config["Region"];
@@ -75,20 +82,10 @@ async Task RecognizeCommand()
 
 void ChangeLanguage(string switchTo)
 {
-    switch (switchTo.ToString().ToLower())
-    {
-        case string l when l.Contains("english") || l.Contains("англ"):
-            PostMessageWrapper(enUS);
-            break;
-        case string l when l.Contains("ukrain") || l.Contains("украин"):
-            PostMessageWrapper(ukUA);
-            break;
-        case string l when l.Contains("russia") || l.Contains("русск"):
-            PostMessageWrapper(ruRU);
-            break;
-        default:
-            break;
-    }
+    var kbLayout = languagesList.FirstOrDefault(x => x.Language.ToLower().Contains(switchTo))?.LanguageIdentifier;
+
+    if(kbLayout != null)
+        PostMessageWrapper((IntPtr)kbLayout);
 }
 
 void PostMessageWrapper(IntPtr kbLayout)
