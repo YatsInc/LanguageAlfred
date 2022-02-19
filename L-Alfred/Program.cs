@@ -1,20 +1,14 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.Extensions.Configuration;
-using System.Runtime.InteropServices;
 using System.Text;
+using static L_Alfred.Languages;
 
-[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-static extern bool PostMessage(IntPtr windowHandle, int Msg, IntPtr wParam, IntPtr lParam);
-
-IntPtr window = (IntPtr)0xffff;
-
-IntPtr enUS = (IntPtr)0x00000409;
-IntPtr ukUA = (IntPtr)0x00000422;
-IntPtr ruRU = (IntPtr)0x00000419;
 
 Console.InputEncoding = Encoding.UTF8;
 Console.OutputEncoding = Encoding.UTF8;
+
+ShowInstalledLanguages();
 
 var config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
@@ -71,28 +65,4 @@ async Task RecognizeCommand()
     await recognizer.StartContinuousRecognitionAsync();
 
     Task.WaitAny(new[] { stopRecognition.Task });
-}
-
-void ChangeLanguage(string switchTo)
-{
-    switch (switchTo.ToString().ToLower())
-    {
-        case string l when l.Contains("english") || l.Contains("англ"):
-            PostMessageWrapper(enUS);
-            break;
-        case string l when l.Contains("ukrain") || l.Contains("украин"):
-            PostMessageWrapper(ukUA);
-            break;
-        case string l when l.Contains("russia") || l.Contains("русск"):
-            PostMessageWrapper(ruRU);
-            break;
-        default:
-            break;
-    }
-}
-
-void PostMessageWrapper(IntPtr kbLayout)
-{
-    PostMessage(window, 0x0050, IntPtr.Zero, kbLayout);
-    PostMessage(window, 0x0051, IntPtr.Zero, kbLayout);
 }
