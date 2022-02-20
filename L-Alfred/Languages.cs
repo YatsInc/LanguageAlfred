@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Management.Automation;
+using System.Globalization;
 using static L_Alfred.Constants;
 using static L_Alfred.WinApi;
 
@@ -11,45 +11,27 @@ public static class Languages
 
     static Languages()
     {
-        InstalledLanguages = GetInstalledLanguages();
+        InstalledLanguages = GetInstalledLanguages().ToList();
     }
 
-    public static List<LanguageModel> GetInstalledLanguages()
+    public static IEnumerable<LanguageModel> GetInstalledLanguages()
     {
-        PowerShell ps = PowerShell.Create().AddCommand("Get-WinUserLanguageList");
-
-        IAsyncResult asyncResult = ps.BeginInvoke();
-
-        List<LanguageModel> installedLanguages = new List<LanguageModel>();
-
-        foreach (PSObject pSObject in ps.EndInvoke(asyncResult))
+        foreach (var p in GetInstalledInputLanguages())
         {
-            foreach (var p in (dynamic)pSObject.BaseObject)
+            var kbLayoutId = "0x" + string.Format("{0:x}", p.KeyboardLayoutId);
+            var identifier = (IntPtr)(int?)new Int32Converter().ConvertFromString(kbLayoutId);
+
+            var subLanguage = p.EnglishName.Split('(');
+            var language = subLanguage[0].Trim();
+            var locale = subLanguage.Length > 1 ? subLanguage[1].TrimEnd(')') : string.Empty;
+
+            yield return new LanguageModel
             {
-                var stringIdentifier = ((List<string>)p.InputMethodTips)?
-                    .FirstOrDefault()?
-                    .Split(':')
-                    .LastOrDefault();
-
-                IntPtr identifier = (IntPtr)(int)new Int32Converter().ConvertFromString("0x" + stringIdentifier);
-
-                var subLanguage = ((string)p.LocalizedName).Split('(');
-
-                var language = subLanguage[0].Trim();
-                var locale = subLanguage.Length > 1
-                    ? subLanguage[1].TrimEnd(')')
-                    : string.Empty;
-
-                installedLanguages.Add(new LanguageModel
-                {
-                    LanguageIdentifier = identifier,
-                    Language = language,
-                    Locale = locale
-                });
-            }
+                LanguageIdentifier = identifier,
+                Language = language,
+                Locale = locale
+            };
         }
-
-        return installedLanguages;
     }
 
     public static void ShowInstalledLanguages()
@@ -67,6 +49,21 @@ public static class Languages
         {
             PostMessage(window, WM_INPUTLANGCHANGEREQUEST, IntPtr.Zero, (IntPtr)kbLayout);
             PostMessage(window, WM_INPUTLANGCHANGE, IntPtr.Zero, (IntPtr)kbLayout);
+        }
+    }
+
+    private static IEnumerable<CultureInfo> GetInstalledInputLanguages()
+    {
+        // first determine the number of installed languages
+        uint size = GetKeyboardLayoutList(0, null!);
+        IntPtr[] ids = new IntPtr[size];
+
+        // then get the handles list of those languages
+        GetKeyboardLayoutList(ids.Length, ids);
+
+        foreach (int id in ids) // note the explicit cast IntPtr -> int
+        {
+            yield return new CultureInfo(id & 0xFFFF);
         }
     }
 }
