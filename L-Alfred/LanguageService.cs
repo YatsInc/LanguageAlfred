@@ -5,11 +5,11 @@ using static L_Alfred.WinApi;
 
 namespace L_Alfred;
 
-public static class Languages
+public static class LanguageService
 {
     private static readonly List<LanguageModel> InstalledLanguages = new List<LanguageModel>();
 
-    static Languages()
+    static LanguageService()
     {
         InstalledLanguages = GetInstalledLanguages().ToList();
     }
