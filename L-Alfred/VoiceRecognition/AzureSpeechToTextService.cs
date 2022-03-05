@@ -5,7 +5,7 @@ using static L_Alfred.LanguageService;
 
 namespace L_Alfred.VoiceRecognition;
 
-public class AzureSpeechToText
+public class AzureSpeechToTextService
 {
     private IConfigurationRoot Config { get; set; }
 
@@ -15,7 +15,7 @@ public class AzureSpeechToText
 
     private SpeechConfig SpeechConfig { get; set; }
 
-    public AzureSpeechToText()
+    public AzureSpeechToTextService()
     {
         Config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()

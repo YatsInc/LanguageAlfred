@@ -7,5 +7,5 @@ Console.OutputEncoding = Encoding.UTF8;
 
 ShowInstalledLanguages();
 
-var recognizer = new AzureSpeechToText();
+var recognizer = new AzureSpeechToTextService();
 await recognizer.RecognizeCommandAsync();
