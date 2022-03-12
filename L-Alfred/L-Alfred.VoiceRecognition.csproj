@@ -3,16 +3,29 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>L_Alfred</RootNamespace>
+    <RootNamespace>L_Alfred.VoiceRecognition</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>2a352a56-11f0-47a3-a95f-637f907c3307</UserSecretsId>
     <Platforms>AnyCPU;x64</Platforms>
+    <PackageIcon>lang_icon_rounded.png</PackageIcon>
+    <ApplicationIcon>icons\lang_icon_rounded.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icons\lang_icon_rounded.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.19.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icons\lang_icon_rounded.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

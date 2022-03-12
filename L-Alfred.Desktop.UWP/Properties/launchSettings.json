@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "L-Alfred.Desktop.UWP (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "L-Alfred.Desktop.UWP (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

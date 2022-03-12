@@ -1,4 +1,4 @@
-﻿namespace L_Alfred;
+﻿namespace L_Alfred.VoiceRecognition.OperatingSystems.Windows;
 
 public static class Constants
 {

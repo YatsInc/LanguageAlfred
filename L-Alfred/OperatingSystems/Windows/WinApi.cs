@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace L_Alfred;
+namespace L_Alfred.VoiceRecognition.OperatingSystems.Windows;
 
 public static class WinApi
 {

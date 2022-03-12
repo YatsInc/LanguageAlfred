@@ -1,20 +1,21 @@
-﻿using System.ComponentModel;
+﻿using L_Alfred.VoiceRecognition.Models;
+using System.ComponentModel;
 using System.Globalization;
-using static L_Alfred.Constants;
-using static L_Alfred.WinApi;
+using static L_Alfred.VoiceRecognition.OperatingSystems.Windows.Constants;
+using static L_Alfred.VoiceRecognition.OperatingSystems.Windows.WinApi;
 
-namespace L_Alfred;
+namespace L_Alfred.VoiceRecognition.OperatingSystems.Windows.Services;
 
-public static class LanguageService
+public class WindowsLanguageService : ILanguageService
 {
-    private static readonly List<LanguageModel> InstalledLanguages = new List<LanguageModel>();
+    private readonly List<LanguageModel> InstalledLanguages = new List<LanguageModel>();
 
-    static LanguageService()
+    public WindowsLanguageService()
     {
         InstalledLanguages = GetInstalledLanguages().ToList();
     }
 
-    public static IEnumerable<LanguageModel> GetInstalledLanguages()
+    public IEnumerable<LanguageModel> GetInstalledLanguages()
     {
         foreach (var p in GetInstalledInputLanguages())
         {
@@ -34,14 +35,14 @@ public static class LanguageService
         }
     }
 
-    public static void ShowInstalledLanguages()
+    public void ShowInstalledLanguages()
     {
         Console.WriteLine("Your installed languages:");
         foreach (var l in InstalledLanguages)
             Console.WriteLine($" - {l.Language}{(!string.IsNullOrEmpty(l.Locale) ? $" ({l.Locale})" : "")}");
     }
 
-    public static void ChangeLanguage(string switchTo)
+    public void ChangeLanguage(string switchTo)
     {
         var kbLayout = InstalledLanguages.FirstOrDefault(x => x.Language.ToLower().Contains(switchTo))?.LanguageIdentifier;
 
@@ -52,7 +53,7 @@ public static class LanguageService
         }
     }
 
-    private static IEnumerable<CultureInfo> GetInstalledInputLanguages()
+    private IEnumerable<CultureInfo> GetInstalledInputLanguages()
     {
         // first determine the number of installed languages
         uint size = GetKeyboardLayoutList(0, null!);

@@ -1,4 +1,4 @@
-﻿namespace L_Alfred;
+﻿namespace L_Alfred.VoiceRecognition.Models;
 
 public class LanguageModel
 {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.Extensions.Configuration;
-using static L_Alfred.LanguageService;
 
-namespace L_Alfred.VoiceRecognition;
+namespace L_Alfred.VoiceRecognition.RecognitionServices;
 
 public class AzureSpeechToTextService
 {
@@ -15,7 +14,9 @@ public class AzureSpeechToTextService
 
     private SpeechConfig SpeechConfig { get; set; }
 
-    public AzureSpeechToTextService()
+    private ILanguageService LanguageService { get; set; }
+
+    public AzureSpeechToTextService(ILanguageService languageService)
     {
         Config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
@@ -25,6 +26,8 @@ public class AzureSpeechToTextService
         ApiRegion = Config["Region"];
 
         SpeechConfig = SpeechConfig.FromSubscription(SubsribtionKey, ApiRegion);
+
+        LanguageService = languageService;
     }
 
     public async Task RecognizeCommandAsync()
@@ -36,7 +39,7 @@ public class AzureSpeechToTextService
 
         recognizer.Recognizing += (s, e) =>
         {
-            ChangeLanguage(e.Result.Text);
+            LanguageService.ChangeLanguage(e.Result.Text);
         };
 
         recognizer.Recognized += (s, e) =>
