@@ -6,7 +6,7 @@ namespace L_Alfred.VoiceRecognition.RecognitionServices;
 
 public class AzureSpeechToTextService
 {
-    private IConfigurationRoot Config { get; set; }
+    //private IConfigurationRoot Config { get; set; }
 
     private string SubsribtionKey { get; set; }
 
@@ -18,12 +18,15 @@ public class AzureSpeechToTextService
 
     public AzureSpeechToTextService(ILanguageService languageService)
     {
-        Config = new ConfigurationBuilder()
+        /*Config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
             .Build();
 
         SubsribtionKey = Config["SubsribtionKey"];
-        ApiRegion = Config["Region"];
+        ApiRegion = Config["Region"];*/
+
+        SubsribtionKey = "a2169e4dec5b42fd8b8390d914224916";
+        ApiRegion = "westeurope";
 
         SpeechConfig = SpeechConfig.FromSubscription(SubsribtionKey, ApiRegion);
 

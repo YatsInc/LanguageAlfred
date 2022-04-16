@@ -1,4 +1,4 @@
-﻿using L_Alfred.VoiceRecognition;
+﻿/*using L_Alfred.VoiceRecognition;
 using L_Alfred.VoiceRecognition.OperatingSystems.Linux.Services;
 using L_Alfred.VoiceRecognition.OperatingSystems.MacOS.Services;
 using L_Alfred.VoiceRecognition.OperatingSystems.Windows.Services;
@@ -32,3 +32,4 @@ languageService.ShowInstalledLanguages();
 
 var recognizer = new AzureSpeechToTextService(languageService);
 await recognizer.RecognizeCommandAsync();
+*/
