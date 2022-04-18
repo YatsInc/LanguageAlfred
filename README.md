@@ -21,5 +21,5 @@ To be able to use it you have to create [Azure speech-to-text](https://docs.micr
 1. Background mode
 2. Support of different voice recognition APIs
 3. Offline usage
-4. UI to be able to set keywords and operate languages
-5. Support of Linux & MacOS
+<!-- 4. UI to be able to set keywords and operate languages -->
+<!-- 5. Support of Linux & MacOS -->
