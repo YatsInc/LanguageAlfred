@@ -4,6 +4,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,7 +41,7 @@ namespace LanguageAlfred.WinUI
         {
             ILanguageService languageService = null;
 
-            if (CheckOS.IsWindows())
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 languageService = new WindowsLanguageService();
             }
