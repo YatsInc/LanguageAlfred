@@ -1,5 +1,6 @@
 ﻿using LanguageAlfred.VoiceRecognition;
 using LanguageAlfred.VoiceRecognition.RecognitionServices;
+using LanguageAlfred.VoiceRecognition.Services;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;

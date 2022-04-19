@@ -1,6 +1,6 @@
 ﻿using LanguageAlfred.VoiceRecognition.Models;
 
-namespace LanguageAlfred.VoiceRecognition;
+namespace LanguageAlfred.VoiceRecognition.Services;
 
 public interface ILanguageService
 {

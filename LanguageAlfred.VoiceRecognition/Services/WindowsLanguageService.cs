@@ -4,7 +4,7 @@ using System.Globalization;
 using static LanguageAlfred.WinApi.WinApiInterop;
 using static LanguageAlfred.WinApi.WinApiParameters;
 
-namespace LanguageAlfred.VoiceRecognition;
+namespace LanguageAlfred.VoiceRecognition.Services;
 
 public class WindowsLanguageService : ILanguageService
 {
