@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "L-Alfred.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "L-Alfred.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
