@@ -1,6 +1,5 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
-using Microsoft.Extensions.Configuration;
 
 namespace LanguageAlfred.VoiceRecognition.RecognitionServices;
 
