@@ -1,10 +1,11 @@
 # Language Alfred
-**Voice assistant** that allows you to switch input languages by voice commands.
+**Voice assistant** that allows you to switch input languages by voice commands(**Windows only**).
 
-Currently supported for *switching* - all installed languages on your PC (*Exceptions may happen*).
+## Currently supported for *switching*
+All installed languages on your PC (*Exceptions may happen*).
 
-Currently supported for *recognizing*:
-- English
+## Currently supported for *recognizing* you can find [here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=speechtotext#speech-to-text)
+**_Note. Default recognition language will be the same as your UI language on your PC._**
 
 ## How to build & use it
 
@@ -19,7 +20,7 @@ Currently supported for *recognizing*:
 Just run :)
 
 ### **Future roadmap: (*by priority*)**
-1. Background mode
+1. Background mode (with Tray)
 2. Support of different voice recognition APIs
 3. Offline usage
 <!-- 4. UI to be able to set keywords and operate languages -->
