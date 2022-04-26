@@ -8,14 +8,15 @@ Currently supported for *recognizing*:
 
 ## How to build & use it
 
-To be able to use it you have to create [Azure speech-to-text](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-to-text) instance in Azure Portal and paste credentials in User Secrets to match format provided below.
+<!--To be able to use it you have to create [Azure speech-to-text](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-to-text) instance in Azure Portal and paste credentials in User Secrets to match format provided below.
 
 ```
 {
   "SubsribtionKey": "value",
   "Region": "value"
 }
-```
+```-->
+Just run :)
 
 ### **Future roadmap: (*by priority*)**
 1. Background mode
