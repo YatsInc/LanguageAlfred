@@ -17,7 +17,7 @@ public class AzureSpeechToTextService
 
     private ILanguageService LanguageService { get; set; }
 
-    public AzureSpeechToTextService(ILanguageService languageService)
+    public AzureSpeechToTextService(ILanguageService languageService, SpeechConfig speechConfig)
     {
         /*Config = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
@@ -26,10 +26,12 @@ public class AzureSpeechToTextService
         SubsribtionKey = Config["SubsribtionKey"];
         ApiRegion = Config["Region"];*/
 
-        SubsribtionKey = "a2169e4dec5b42fd8b8390d914224916";
-        ApiRegion = "westeurope";
+        /*SubsribtionKey = subscribtionKey;
+        ApiRegion = region;
 
-        SpeechConfig = SpeechConfig.FromSubscription(SubsribtionKey, ApiRegion);
+        SpeechConfig = SpeechConfig.FromSubscription(SubsribtionKey, ApiRegion);*/
+
+        SpeechConfig = speechConfig;
 
         LanguageService = languageService;
     }

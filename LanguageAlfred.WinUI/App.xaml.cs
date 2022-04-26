@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
+using System;
 
 namespace LanguageAlfred.WinUI
 {
@@ -7,14 +10,25 @@ namespace LanguageAlfred.WinUI
         public App()
         {
             this.InitializeComponent();
+
+            Ioc.Default.ConfigureServices(ConfigureServices());
         }
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
-            //m_window.Activate();
+            MainWindow = new MainWindow();
+            MainWindow.Title = "Alfred";
+            MainWindow.Activate();
         }
 
-        private Window m_window;
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            services.AddSingleton<MainWindowViewModel>();
+            return services.BuildServiceProvider();
+        }
+
+        public static Window MainWindow { get; private set; }
     }
 }

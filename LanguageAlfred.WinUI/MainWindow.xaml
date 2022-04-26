@@ -7,9 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="AppTitleBar">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid x:Name="AppTitleBar" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Language Alfred" FontSize="70"/>
+        </StackPanel>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="20,0,0,0" Grid.Column="0">
+            <StackPanel Width="300" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,20,0,20">
+                <TextBlock Text="Azure speech to text" FontSize="25" FontWeight="SemiBold"/>
+
+                <TextBox x:Name="subscribtionKeyTextBox"
+                         Header="Enter your subsctibtion key:" PlaceholderText="Subscribtion Key" Text="a2169e4dec5b42fd8b8390d914224916"
+                         Margin="0,10" Width="300" HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="regionTextBox"
+                         Header="Enter your region:" PlaceholderText="Region" Text="westeurope"
+                         Margin="0,10" Width="300" HorizontalAlignment="Left"/>
+
+                <Button x:Name="ConnectToAzureBtn" Content="Connect" Width="150" Margin="0,10,0,0" HorizontalAlignment="Center" Click="ConnectToAzureSpeechToText"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left"  Grid.Column="1" Spacing="10" Padding="20">
+            <TextBlock  Style="{StaticResource TitleTextBlockStyle}"
+                            Margin="0,4,0,0"
+                            FontWeight="Normal"
+                            Text="Theme Mode" />
+            <StackPanel x:Name="themePanel" Margin="0,10,0,0">
+                <RadioButton Tag="Default" IsChecked="True" Content="Default" Command="{x:Bind mainWindowViewModel.SetThemeCommand}" CommandParameter="Default"/>
+                <RadioButton Tag="Light" Content="Light"  Command="{x:Bind mainWindowViewModel.SetThemeCommand}" CommandParameter="Light"/>
+                <RadioButton Tag="Dark" Content="Dark"  Command="{x:Bind mainWindowViewModel.SetThemeCommand}" CommandParameter="Dark"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
