@@ -1,6 +1,7 @@
 ﻿using LanguageAlfred.VoiceRecognition.Services;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
+using System.Globalization;
 
 namespace LanguageAlfred.VoiceRecognition.RecognitionServices;
 
@@ -35,8 +36,10 @@ public class AzureSpeechToTextService
 
     public async Task RecognizeCommandAsync()
     {
+        var currentOSLanguageLeftTag = CultureInfo.CurrentUICulture.Name;
+
         using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-        using var recognizer = new SpeechRecognizer(SpeechConfig, audioConfig);
+        using var recognizer = new SpeechRecognizer(SpeechConfig, currentOSLanguageLeftTag, audioConfig);
 
         var stopRecognition = new TaskCompletionSource<int>();
 

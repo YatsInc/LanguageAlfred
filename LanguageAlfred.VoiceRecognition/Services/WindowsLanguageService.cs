@@ -22,27 +22,32 @@ public class WindowsLanguageService : ILanguageService
             var kbLayoutId = "0x" + string.Format("{0:x}", p.KeyboardLayoutId);
             var identifier = (IntPtr)(int?)new Int32Converter().ConvertFromString(kbLayoutId);
 
-            var subLanguage = p.EnglishName.Split('(');
-            var language = subLanguage[0].Trim();
-            var locale = subLanguage.Length > 1 ? subLanguage[1].TrimEnd(')') : string.Empty;
+            var displayLanguageName = p.DisplayName
+                .Split('(')[0]
+                .Trim();
+
+            var englishLanguageName = p.EnglishName
+                .Split('(')[0]
+                .Trim();
 
             yield return new LanguageModel
             {
                 LanguageIdentifier = identifier,
-                Language = language,
-                Locale = locale
+                DisplayLanguageName = displayLanguageName,
+                EnglishLanguageName = englishLanguageName,
             };
         }
     }
 
     public void ChangeLanguage(string switchTo)
     {
-        var kbLayout = InstalledLanguages.FirstOrDefault(x => x.Language.ToLower().Contains(switchTo))?.LanguageIdentifier;
+        var kbLayout = InstalledLanguages.FirstOrDefault(x =>   x.DisplayLanguageName.ToLower() == switchTo.ToLower() ||
+                                                                x.EnglishLanguageName.ToLower() == switchTo.ToLower());
 
-        if (kbLayout != null)
+        if (kbLayout is not null)
         {
-            PostMessage(window, WM_INPUTLANGCHANGEREQUEST, IntPtr.Zero, (IntPtr)kbLayout);
-            PostMessage(window, WM_INPUTLANGCHANGE, IntPtr.Zero, (IntPtr)kbLayout);
+            PostMessage(window, WM_INPUTLANGCHANGEREQUEST, IntPtr.Zero, kbLayout.LanguageIdentifier);
+            PostMessage(window, WM_INPUTLANGCHANGE, IntPtr.Zero, kbLayout.LanguageIdentifier);
         }
     }
 
