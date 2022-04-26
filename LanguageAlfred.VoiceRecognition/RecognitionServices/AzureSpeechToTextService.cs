@@ -36,10 +36,10 @@ public class AzureSpeechToTextService
 
     public async Task RecognizeCommandAsync()
     {
-        var currentOSLanguageLeftTag = CultureInfo.CurrentUICulture.Name;
+        var currentUILanguageLeftTag = CultureInfo.CurrentUICulture.Name;
 
         using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-        using var recognizer = new SpeechRecognizer(SpeechConfig, currentOSLanguageLeftTag, audioConfig);
+        using var recognizer = new SpeechRecognizer(SpeechConfig, currentUILanguageLeftTag, audioConfig);
 
         var stopRecognition = new TaskCompletionSource<int>();
 
