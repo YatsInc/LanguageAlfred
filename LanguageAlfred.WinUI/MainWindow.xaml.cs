@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using H.NotifyIcon;
+using H.NotifyIcon.EfficiencyMode;
 using LanguageAlfred.VoiceRecognition;
 using LanguageAlfred.VoiceRecognition.RecognitionServices;
 using LanguageAlfred.VoiceRecognition.Services;
@@ -41,11 +43,15 @@ namespace LanguageAlfred.WinUI
             //SetToRunOnStartup();
 
             appWindow.Resize(size);
-
-            appWindow.Hide();
+            ConnectToAzure();
         }
 
         private void ConnectToAzureSpeechToText(object sender, RoutedEventArgs e)
+        {
+            ConnectToAzure();
+        }
+
+        private void ConnectToAzure()
         {
             var subscribtionKey = subscribtionKeyTextBox.Text;
             var region = regionTextBox.Text;
