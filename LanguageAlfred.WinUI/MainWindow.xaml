@@ -5,6 +5,8 @@
     xmlns:local="using:LanguageAlfred.WinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:LanguageAlfred.WinUI.Views"
+    xmlns:tb="using:H.NotifyIcon"
     mc:Ignorable="d">
 
     <Grid x:Name="AppTitleBar" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -42,5 +44,8 @@
                 <RadioButton Tag="Dark" Content="Dark"  Command="{x:Bind mainWindowViewModel.SetThemeCommand}" CommandParameter="Dark"/>
             </StackPanel>
         </StackPanel>
+
+        <views:TrayIconView x:Name="TrayIconView" />
     </Grid>
+
 </Window>

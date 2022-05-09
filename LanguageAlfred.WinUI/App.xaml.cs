@@ -1,12 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using H.NotifyIcon;
+using LanguageAlfred.WinUI.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using System;
 
 namespace LanguageAlfred.WinUI
 {
     public partial class App : Application
     {
+        public static Window MainWindow { get; private set; }
+
         public App()
         {
             this.InitializeComponent();
@@ -19,6 +25,7 @@ namespace LanguageAlfred.WinUI
             MainWindow = new MainWindow();
             MainWindow.Title = "Alfred";
             MainWindow.Activate();
+            MainWindow.Hide();
         }
 
         private static IServiceProvider ConfigureServices()
@@ -28,7 +35,5 @@ namespace LanguageAlfred.WinUI
             services.AddSingleton<MainWindowViewModel>();
             return services.BuildServiceProvider();
         }
-
-        public static Window MainWindow { get; private set; }
     }
 }
