@@ -62,7 +62,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="TrayIconRecources.xaml">
+    <Page Update="Resources\TrayIconRecources.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\TrayIconView.xaml">

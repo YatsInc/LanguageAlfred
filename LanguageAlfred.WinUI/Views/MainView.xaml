@@ -24,14 +24,21 @@
                 <TextBlock Text="Azure speech to text" FontSize="25" FontWeight="SemiBold"/>
 
                 <TextBox x:Name="subscribtionKeyTextBox"
-                         Header="Enter your subsctibtion key:" PlaceholderText="Subscribtion Key" Text="a2169e4dec5b42fd8b8390d914224916"
-                         Margin="0,10" Width="300" HorizontalAlignment="Left"/>
+                         Header="Enter your subsctibtion key:" PlaceholderText="Subscribtion Key"
+                         Margin="0,10" Width="300" HorizontalAlignment="Left"
+                         Text="{x:Bind mainViewModel.SubscriptionKey, Mode=TwoWay}"/>
 
                 <TextBox x:Name="regionTextBox"
-                         Header="Enter your region:" PlaceholderText="Region" Text="westeurope"
-                         Margin="0,10" Width="300" HorizontalAlignment="Left"/>
+                         Header="Enter your region:" PlaceholderText="Region"
+                         Margin="0,10" Width="300" HorizontalAlignment="Left"
+                         Text="{x:Bind mainViewModel.SubscriptionKey, Mode=TwoWay}"/>
 
-                <Button x:Name="ConnectToAzureBtn" Content="Connect" Width="150" Margin="0,10,0,0" HorizontalAlignment="Center" Click="ConnectToAzureSpeechToText"/>
+                <Button x:Name="ConnectToAzureBtn"
+                        Content="Connect"
+                        Width="150"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        Command="{x:Bind mainViewModel.ConnectToAzure}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left"  Grid.Column="1" Spacing="10" Padding="20">

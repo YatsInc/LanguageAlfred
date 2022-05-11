@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using H.NotifyIcon;
+using LanguageAlfred.VoiceRecognition.Services;
 using LanguageAlfred.WinUI.Services;
 using LanguageAlfred.WinUI.Services.Interfaces;
 using LanguageAlfred.WinUI.ViewModels;
@@ -43,6 +44,8 @@ namespace LanguageAlfred.WinUI
             appWindow.Resize(size);
 
             MainWindow.Title = "Alfred";
+            MainWindow.ExtendsContentIntoTitleBar = true;
+            MainWindow.SetTitleBar(MainWindow.Content);
             MainWindow.Activate();
             MainWindow.Hide();
         }
@@ -51,6 +54,7 @@ namespace LanguageAlfred.WinUI
         {
             var services = new ServiceCollection();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            services.AddSingleton<ILanguageService, WindowsLanguageService>();
             services.AddSingleton<MainViewModel>();
             return services.BuildServiceProvider();
         }
