@@ -1,48 +1,32 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
-using H.NotifyIcon;
-using H.NotifyIcon.EfficiencyMode;
-using LanguageAlfred.VoiceRecognition;
 using LanguageAlfred.VoiceRecognition.RecognitionServices;
 using LanguageAlfred.VoiceRecognition.Services;
+using LanguageAlfred.WinUI.ViewModels;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.Win32;
 using System;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LanguageAlfred.WinUI
+namespace LanguageAlfred.WinUI.Views
 {
-    public sealed partial class MainWindow : Window
+    public sealed partial class MainView : Page
     {
-        private MainWindowViewModel mainWindowViewModel { get; set; }
-        private string LanguageAlfredStartupName = "Language Alfred";
+        private MainViewModel mainViewModel { get; set; }
 
-        public MainWindow()
+        public MainView()
         {
             this.InitializeComponent();
 
-            mainWindowViewModel = Ioc.Default.GetRequiredService<MainWindowViewModel>();
+            mainViewModel = Ioc.Default.GetRequiredService<MainViewModel>();
 
             //ExtendsContentIntoTitleBar = true;
             //SetTitleBar(AppTitleBar);
 
-            IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this); // m_window in App.cs
-            WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
-            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
-
-            var size = new Windows.Graphics.SizeInt32();
-            size.Width = 800;
-            size.Height = 400;
-
-            //SetToRunOnStartup();
-
-            appWindow.Resize(size);
             ConnectToAzure();
         }
 
@@ -81,24 +65,5 @@ namespace LanguageAlfred.WinUI
             var recognizer = new AzureSpeechToTextService(languageService, speechConfig);
             await recognizer.RecognizeCommandAsync();
         }
-
-        //TODO - check this example https://gist.github.com/HelBorn/2266242
-        /*private void SetToRunOnStartup()
-        {
-            //todo - check this example https://gist.github.com/HelBorn/2266242
-            try
-            {
-                string exePath = Assembly.GetEntryAssembly().Location;
-                RegistryKey rk = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-                string? regRef = rk.GetValue(LanguageAlfredStartupName)?.ToString();
-                rk.DeleteValue(regRef);
-                if (regRef is null)
-                    rk.SetValue(LanguageAlfredStartupName, exePath);
-            }
-            catch(Exception ex)
-            {
-
-            }
-        }*/
     }
 }

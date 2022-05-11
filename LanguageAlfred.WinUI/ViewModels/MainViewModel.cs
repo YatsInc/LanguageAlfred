@@ -1,16 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LanguageAlfred.WinUI.Services.Interfaces;
 using Microsoft.UI.Xaml;
 using System;
 using System.Windows.Input;
 
-namespace LanguageAlfred.WinUI;
+namespace LanguageAlfred.WinUI.ViewModels;
 
-public class MainWindowViewModel : ObservableObject
+public class MainViewModel : ObservableObject
 {
     private readonly IThemeSelectorService _themeSelectorService;
-    private string? _topTitle;
-    public string? TopTitle
+    private string _topTitle;
+    public string TopTitle
     {
         get => _topTitle;
         set => SetProperty(ref _topTitle, value);
@@ -18,7 +19,7 @@ public class MainWindowViewModel : ObservableObject
 
     public ICommand SetThemeCommand { get; set; }
 
-    public MainWindowViewModel(IThemeSelectorService themeSelectorService)
+    public MainViewModel(IThemeSelectorService themeSelectorService)
     {
         SetThemeCommand = new RelayCommand<string>((themeName) => UpdateTheme(themeName));
         _themeSelectorService = themeSelectorService;
