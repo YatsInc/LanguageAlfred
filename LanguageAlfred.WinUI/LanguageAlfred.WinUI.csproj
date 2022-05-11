@@ -24,6 +24,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="TrayIconRecources.xaml" />
+    <None Remove="Views\MainView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +57,12 @@
     <ProjectReference Include="..\LanguageAlfred.VoiceRecognition\LanguageAlfred.VoiceRecognition.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="TrayIconRecources.xaml">
+    <Page Update="Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\TrayIconRecources.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\TrayIconView.xaml">

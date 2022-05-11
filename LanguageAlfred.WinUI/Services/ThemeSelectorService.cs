@@ -1,18 +1,13 @@
-﻿using Microsoft.UI.Xaml;
+﻿using LanguageAlfred.WinUI.Services.Interfaces;
+using Microsoft.UI.Xaml;
 
-namespace LanguageAlfred.WinUI;
-
-public interface IThemeSelectorService
-{
-    public ElementTheme GetTheme();
-    public void SetTheme(ElementTheme theme);
-}
+namespace LanguageAlfred.WinUI.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
 {
     public ElementTheme GetTheme()
     {
-        if(App.MainWindow?.Content is FrameworkElement frameworkElement)
+        if (App.MainWindow?.Content is FrameworkElement frameworkElement)
         {
             return frameworkElement.ActualTheme;
         }

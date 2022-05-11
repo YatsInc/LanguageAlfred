@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="using:H.NotifyIcon"
     mc:Ignorable="d"
-    >
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <UserControl.Resources>
         <XamlUICommand
             x:Key="ShowHideWindowCommand"

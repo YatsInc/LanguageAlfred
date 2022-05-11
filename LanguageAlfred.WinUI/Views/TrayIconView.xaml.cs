@@ -1,6 +1,5 @@
 ﻿using H.NotifyIcon;
 using Microsoft.UI.Xaml.Input;
-using System;
 
 namespace LanguageAlfred.WinUI.Views;
 
