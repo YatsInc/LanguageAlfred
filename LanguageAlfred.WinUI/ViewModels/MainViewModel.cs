@@ -27,6 +27,8 @@ public class MainViewModel : ObservableObject
         set => SetProperty(ref _region, value);
     }
 
+    public bool ConnectToAzureBtnEnabled { get; set; } = true;
+
     private readonly IThemeSelectorService _themeSelectorService;
     private readonly ILanguageService _languageService;
 
@@ -60,5 +62,7 @@ public class MainViewModel : ObservableObject
         {
             await recognizer.RecognizeCommandAsync();
         }).Start();
+
+        ConnectToAzureBtnEnabled = false;
     }
 }

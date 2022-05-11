@@ -45,9 +45,9 @@ namespace LanguageAlfred.WinUI
 
             MainWindow.Title = "Alfred";
             MainWindow.ExtendsContentIntoTitleBar = true;
-            MainWindow.SetTitleBar(MainWindow.Content);
+            //MainWindow.SetTitleBar(MainWindow.Content);
             MainWindow.Activate();
-            MainWindow.Hide();
+            //MainWindow.Hide();
         }
 
         private static IServiceProvider ConfigureServices()
