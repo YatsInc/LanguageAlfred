@@ -23,9 +23,10 @@ Just run :)
 ```-->
 
 # **Roadmap: (*by priority*)**
-1. Background mode (with Tray)
-2. Posibility to run on startup
-3. UI to be able to change recognition APIs, set keywords and operate languages
-4. Support of different voice recognition APIs
-5. Offline usage
-6. ~~Support of Linux & MacOS~~
+:white_check_mark: **Background mode** (with Tray) <br>
+:x: Run on **Startup** <br>
+:x: Support of **different** voice recognition **APIs** <br>
+:x: UI to be able to **change recognition APIs**, set keywords and operate languages <br>
+:x: **Offline** usage <br>
+:x: Release to **Microsoft Store** <br>
+:x: ~~Support of Linux & MacOS~~<br>
