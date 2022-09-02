@@ -1,4 +1,4 @@
-# Language Alfred
+# Language Alfred _**[ON HOLD]**_
 **Voice assistant** that allows you to switch input languages by voice commands(**Windows only**).<br>
 Perfectly fit for users that have **more than 2 input languages** on their PC and tired to press buttons every time to switch the new language.
 
